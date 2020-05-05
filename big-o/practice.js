@@ -9,7 +9,7 @@
 // }
 
 // sheep(3)
-
+// linear O(n)
 // function sheep(num) {
 //   for (let i = num; i > 0; i--) {
 //     console.log(`${i}: Another sheep jumps over teh fence`);
@@ -21,7 +21,7 @@
 // }
 
 // sheep(3);
-
+// Linear O(n)
 // function powerCalculator(base, exp) {
 //   if (exp <= 0) {
 //     return "exponent should be >= 0"
@@ -67,6 +67,7 @@
 // // ng     irts
 // // g      girts
 // //        gnirts
+// Linear O(n)
 // function reverseString(string, newS='') {
 //   if  (!string.length) {
 //     return ''
@@ -88,7 +89,7 @@ function reverseString(string) {
   return str;
 }
 
-console.log(reverseString("muffins"));
+//console.log(reverseString("muffins"));
 // // Calculate the nth triangular number.
 // //   A triangular number counts the objects that can form an equilateral triangle.
 // //   The nth triangular number is the number of dots composing a triangle with n dots on a side, and is equal to the sum of the n natural numbers from 1 to n.
@@ -112,7 +113,7 @@ console.log(reverseString("muffins"));
 // // 5   15
 // // 6    21
 // // 7    28
-
+// O(n)
 // function triangle(num) {
 //   if (num === 1) {
 //     return 1
@@ -120,8 +121,18 @@ console.log(reverseString("muffins"));
 
 //   return num + triangle(num - 1)
 // }
-
-// triangle(3)
+function print(a) {
+  console.log(a);
+}
+// Linear O(n)
+function triangle(num) {
+  let sum = 0;
+  for(let i = 1; i <= num; i++) {
+    sum += i;
+  }
+  return sum;
+}
+print(`Expected: 6, actual:${triangle(3)}`);
 
 // // Write a recursive function that splits a string based on a separator (similar to String.prototype.split). Don't use JS array's split function to solve this problem.
 
@@ -132,7 +143,7 @@ console.log(reverseString("muffins"));
 // // 20/2020      ['02']
 // // 2020          ['02','20']
 // //             ["02", "20", "2020"]
-
+// O(n)
 // function splitter(str, separator, test = 0) {
 
 //   if (!str.includes(separator)){
@@ -147,9 +158,25 @@ console.log(reverseString("muffins"));
 // }
 
 // splitter('02/20/2020', '/')
-
+// Linear O(n)
+function splitter(str, sep) {
+  let arr = [];
+  for(let i = 0; i < str.length; i++) {
+    if(str[i] === sep) {
+      arr.push(str.slice(0, i));
+      str = str.slice(i+1, str.length);
+      i = 0;
+      let temp = str;
+    }
+    // if(i = str.length - 1) {
+    //   arr.push(str);
+    // }
+  }
+  arr.push(str);
+  return arr;
+}
 // // Write a recursive function that prints the Fibonacci sequence of a given number. The Fibonacci sequence is a series of numbers in which each number is the sum of the 2 preceding numbers. For example, the 7th Fibonacci number in a Fibonacci sequence is 13. The sequence looks as follows: 1, 1, 2, 3, 5, 8, 13.
-
+print(splitter('02/20/2020', '/'));
 // // 1 1
 // // 1 2
 // // 2 3
@@ -157,7 +184,7 @@ console.log(reverseString("muffins"));
 // // 5 5
 // // 8 6
 // // 13 7
-
+// O(n)
 // function fib(num) {
 //   if (num === 1) {
 //     return 1
@@ -169,7 +196,19 @@ console.log(reverseString("muffins"));
 // }
 
 // fib(7)
-
+function fib(num) {
+  let arr = [];
+  if (num <= 2) {
+    return 1;
+  } else {
+    arr = [1, 1];  
+  for(let i = 2; i <= num; i++) {
+    arr[i] = arr[i-1] + arr[i-2];
+  }
+}
+  return arr[arr.length - 1];
+}
+print(fib(7));
 // Write a recursive function that finds the factorial of a given number. The factorial of a number can be found by multiplying that number by each number between itself and 1. For example, the factorial of 5 is 5 * 4 * 3 * 2 * 1 = 120.
 // input: 5
 // output: 120
@@ -186,22 +225,33 @@ console.log(reverseString("muffins"));
 
 //   return num * fact(num - 1)
 // }
-
+// Linear O(n)
+function fact(num) {
+    if (num === 1){
+    return 1
+  }
+  let res = 1;
+  for(let i = num; i >= 1; i--) {
+    res *= i;
+  }
+  return res;
+}
+print(fact(4));
 // fact(4)
 
-let mySmallMaze = [
-  [" ", " ", " "],
-  [" ", "*", " "],
-  [" ", " ", "e"],
-];
+// let mySmallMaze = [
+//   [" ", " ", " "],
+//   [" ", "*", " "],
+//   [" ", " ", "e"],
+// ];
 
-let myBigMaze = [
-  [" ", " ", " ", "*", " ", " ", " "],
-  ["*", "*", " ", "*", " ", "*", " "],
-  [" ", " ", " ", " ", " ", " ", " "],
-  [" ", "*", "*", "*", "*", "*", " "],
-  [" ", " ", " ", " ", " ", " ", "e"],
-];
+// let myBigMaze = [
+//   [" ", " ", " ", "*", " ", " ", " "],
+//   ["*", "*", " ", "*", " ", "*", " "],
+//   [" ", " ", " ", " ", " ", " ", " "],
+//   [" ", "*", "*", "*", "*", "*", " "],
+//   [" ", " ", " ", " ", " ", " ", "e"],
+// ];
 
 //check value of each item in array for ' '
 //if open path is found, increment index2 and return r
